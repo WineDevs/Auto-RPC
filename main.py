@@ -30,7 +30,7 @@ def active_window_process_name():
         pass
 
 apps = None#This for IDE to remove errors
-exec('apps = '+requests.get('https://raw.githubusercontent.com/purpl3-yt/trash-bin/main/apps.py').text)#apps
+exec('apps = '+requests.get('https://raw.githubusercontent.com/WineDevs/Auto-RPC/main/apps.py').text)#apps
 
 #vars
 currect_window = ''
