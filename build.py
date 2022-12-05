@@ -6,7 +6,7 @@ if os.path.isfile('./main.exe'):
     os.remove('main.exe')#Delete previous build
 
 def build():
-    os.system('nuitka main.py')#build with nuitka
+    os.system('nuitka --standalone main.py')#build with nuitka
 
 def clear():
     for f in ['main.cmd','main.build']:#Files
