@@ -142,7 +142,7 @@ Enter: '''))
                     break
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':#Start
     ticon = Thread(target=run_icon,args=(icon,))
     ticon.daemon = True
     ticon.start()
