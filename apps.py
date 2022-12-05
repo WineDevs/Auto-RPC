@@ -10,6 +10,7 @@
     #Apps
     'code.exe':['code',True,'Visual Studio Code'],#Visual Studio Code
     'aimp.exe':['aimp',False],#AIMP
+
     #Windows apps
     'explorer.exe':['explorer',False],#Windows Explorer
     'searchhost.exe':['windows',False],#Windows Menu

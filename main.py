@@ -30,7 +30,12 @@ def active_window_process_name():
         pass
 
 apps = None#This for IDE to remove errors
-exec('apps = '+requests.get('https://raw.githubusercontent.com/WineDevs/Auto-RPC/main/apps.py').text)#apps
+
+#exec('apps = '+requests.get('https://raw.githubusercontent.com/WineDevs/Auto-RPC/main/apps.py').text)
+#^---- This apps from online
+
+#To use apps from local storage use this command!
+exec('apps = '+open('apps.py','r').read())
 
 #vars
 currect_window = ''
@@ -53,7 +58,7 @@ class Main(Thread):
                 if currect_window!=str(window.lower()):
                     print('Foreground window process: '+window)
                     currect_window=window.lower()
-                    dict_window = apps[str(window.lower())]
+                    dict_window = apps[window.lower()]
                     try:
                         window_custom_name = apps[str(window.lower())][2]
                     except IndexError:
@@ -88,7 +93,6 @@ icon = pystray.Icon('Neural', image, menu=pystray.Menu(
 
 def run_icon(icon):
     icon.run()
-
 
 def MainMenu():
     global delay,stop,debug

@@ -1,6 +1,6 @@
 from ctypes import windll, Structure, c_long, byref
 import time
-import os
+import os,re
 
 def pause():
     os.system('pause')
