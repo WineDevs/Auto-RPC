@@ -2,9 +2,11 @@ import os,sys,glob
 out_folder = './out'
 main_script = './main.py'
 
+#Build script from our launcher, https://github.com/WineDevs/Wine-Launcher
+
 def build():
     #os.system(sys.path[0]+'\\venv\\Scripts\\activate.bat')#use venv to low exe size
-    os.system(f'pyinstaller --noconfirm --onefile --windowed --clean --distpath "{out_folder}" --icon "./assets/auto_rpc_logo.ico" --name "Auto_RPC"  "{main_script}"')
+    os.system(f'pyinstaller --noconfirm --onefile --console --clean --distpath "{out_folder}" --icon "./assets/auto_rpc_logo.ico" --name "Auto_RPC"  "{main_script}"')
 
 def clear_cache():#delete unused files
     all_specs = glob.glob('./*.spec')
