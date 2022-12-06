@@ -10,16 +10,21 @@ import PIL.Image
 import platform
 import requests
 import pystray
-import os
+import os,sys
+
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 if platform.system().lower() != 'windows':
     print("Sorry, this program doesn't support Linux systems")
     quit()
 
-if not os.path.isdir('./assets'):
-    os.mkdir('./assets')
-if not os.path.isfile('./assets/auto_rpc_logo.png'):
-    with open('./assets/auto_rpc_logo.png','wb') as lg:
+if not os.path.isdir(resource_path('assets')):
+    os.mkdir(resource_path('assets'))
+if not os.path.isfile(resource_path('assets\\auto_rpc_logo.png')):
+    with open(resource_path('assets\\auto_rpc_logo.png'),'wb') as lg:
         lg.write(logo)
 
 def active_window_process_name():
@@ -31,11 +36,11 @@ def active_window_process_name():
 
 apps = None#This for IDE to remove errors
 
-#exec('apps = '+requests.get('https://raw.githubusercontent.com/WineDevs/Auto-RPC/main/apps.py').text)
-#^---- This apps from online
+exec('apps = '+requests.get('https://raw.githubusercontent.com/WineDevs/Auto-RPC/main/apps.py').text)
+#^---- This apps from online, github
 
 #To use apps from local storage use this command!
-exec('apps = '+open('apps.py','r').read())
+#exec('apps = '+open('apps.py','r').read())
 
 #vars
 currect_window = ''
@@ -52,10 +57,10 @@ class Main(Thread):
                 break
             window = active_window_process_name()
             if debug:
-                print(window,'X: '+str(getMousePosition()['x']),'Y: '+str(getMousePosition()['y']))
+                print(window,'X: '+str(getMousePosition()['x']),'Y: '+str(getMousePosition()['y']))#print mouse X and Y when debug on
             
             try:
-                if currect_window!=str(window.lower()):
+                if currect_window!=str(window).lower():#optimize code
                     print('Foreground window process: '+window)
                     currect_window=window.lower()
                     dict_window = apps[window.lower()]
@@ -83,7 +88,7 @@ def Show():
 def Creator():
     webbrowser.open('https://github.com/purpl3-yt')
 
-image = PIL.Image.open('./assets/auto_rpc_logo.png')
+image = PIL.Image.open(resource_path('assets\\auto_rpc_logo.png'))#open logo
 
 icon = pystray.Icon('Neural', image, menu=pystray.Menu(
     pystray.MenuItem('Hide',Hide),
