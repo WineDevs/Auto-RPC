@@ -14,12 +14,19 @@
     #Windows apps
     'explorer.exe':['explorer',False],#Windows Explorer
     'searchhost.exe':['windows',False],#Windows Menu
+    'shellexperiencehost.exe':['shellexperiencehost',False,'Windows Shell Experience Host'],
     'cmd.exe':['cmd',False,'Command Prompt'],
     'powershell.exe':['powershell',False],
     #Games
+
     #Roblox
     'RobloxPlayerLauncher.exe':['roblox',True],
     'RobloxStudioBeta.exe':['robloxstudio',True,'Roblox Studio'],
+    
     #Source Engine Games
     'hl2.exe':['hl2',True,'Source Engine Game']
+
+
+
 }
+
