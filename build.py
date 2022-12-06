@@ -1,30 +1,17 @@
-import os,sys,shutil,time
-
-os.chdir(sys.path[0])#cd to currect dir
-
-if os.path.isfile('./main.exe'):
-    os.remove('main.exe')#Delete previous build
+import os,sys,glob
+out_folder = './out'
+main_script = './main.py'
 
 def build():
-    os.system('nuitka --standalone main.py')#build with nuitka
+    #os.system(sys.path[0]+'\\venv\\Scripts\\activate.bat')#use venv to low exe size
+    os.system(f'pyinstaller --noconfirm --onefile --windowed --clean --distpath "{out_folder}" --icon "./assets/auto_rpc_logo.ico" --name "Auto_RPC"  "{main_script}"')
 
-def clear():
-    for f in ['main.cmd','main.build']:#Files
-        if os.path.isfile(f):
-            os.remove('./'+f)#Delete file
-        elif os.path.isdir(f):
-            shutil.rmtree(f)#Delete tree
+def clear_cache():#delete unused files
+    all_specs = glob.glob('./*.spec')
+    for spec in all_specs:
+        os.remove(spec)
+    os.remove('./build')
 
-def set_icon():
-    os.system('rcedit.exe main.exe --set-icon "assets\\auto_rpc_logo.ico"')#add icon to exe
-
-def rename():
-    os.rename('./main.exe','./Auto_RPC.exe')#Rename exe
-
-build()#Build
-time.sleep(3)#Wait 3 seconds
-clear()#delete unused folders, files
-set_icon()#Set icon to exe
-rename()#Rename exe file
-
-#Auto Build?
+if '__main__' == __name__:
+    build()#build
+    clear_cache()#clear cache etc
