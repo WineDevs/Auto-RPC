@@ -55,38 +55,44 @@ class Main(Thread):
         while True:
             if stop:
                 break
+            
             window = active_window_process_name()
+
             if debug:
                 print(window,'X: '+str(getMousePosition()['x']),'Y: '+str(getMousePosition()['y']))#print mouse X and Y when debug on
             
             try:
                 if currect_window!=str(window).lower():#optimize code
+            
                     print('Foreground window process: '+window)
+            
                     currect_window=window.lower()
                     dict_window = apps[window.lower()]
+            
                     try:
                         window_custom_name = apps[str(window.lower())][2]
                     except IndexError:
                         set_rpc(dict_window[0],dict_window[1])
                     else:
                         set_rpc(dict_window[0],dict_window[1],window_custom_name)    
+            
             except KeyError:
                 set_rpc('none')
             wait(int(delay))
 
 main = Main()#define
 
-kernel32 = WinDLL('kernel32')
-user32 = WinDLL('user32')
-hWnd = kernel32.GetConsoleWindow()
+kernel32 = WinDLL('kernel32')#get windows dll
+user32 = WinDLL('user32')#get windows dll
+hWnd = kernel32.GetConsoleWindow()#get console window
 
 def Hide():
-    user32.ShowWindow(hWnd, win32con.SW_HIDE)
+    user32.ShowWindow(hWnd, win32con.SW_HIDE)#hide window
 def Show():
-    user32.ShowWindow(hWnd, win32con.SW_SHOW)
+    user32.ShowWindow(hWnd, win32con.SW_SHOW)#show window
 
 def Creator():
-    webbrowser.open('https://github.com/purpl3-yt')
+    webbrowser.open('https://github.com/purpl3-yt')#open creator github page
 
 image = PIL.Image.open(resource_path('assets\\auto_rpc_logo.png'))#open logo
 
