@@ -43,7 +43,7 @@ exec('apps = '+requests.get('https://raw.githubusercontent.com/WineDevs/Auto-RPC
 #exec('apps = '+open('apps.py','r').read())
 
 #vars
-currect_window = ''
+currect_window = None
 stop = False
 show = True
 debug = False
@@ -149,6 +149,7 @@ Enter: '''))
                         debug=True
                         print('Debug on')
                         pause()
+                                    
                 elif settings=='3':
                     break
 
